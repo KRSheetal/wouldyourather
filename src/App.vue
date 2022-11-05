@@ -1,14 +1,13 @@
 <template>
   <div id="app">
 
-    <h1>Would you rather...</h1>
+    <h1>Would you rather?</h1>
 
-    <WouldYouRather v-bind:question="wyrQuestion"
-    v-bind:answer1="wyrAnswer1"
-    v-bind:answer2="wyrAnswer2"
+    <WouldYouRather v-for="question in questions" v-bind:key="question" v-bind:question= "question"
+ 
     v-on:answer-changed="answerChanged"></WouldYouRather>
 
-    <p>{{userSelectionMessage}}</p>
+    <p>You would rather...{{choice}}</p>
 
   </div>
 </template>
@@ -23,15 +22,36 @@ export default {
   },
   data(){
     return{
-      wyrQuestion: 'Would you rather live in a house shaped like a triangle or a house shaped like a circle?',
-      wyrAnswer1: 'Triangle house',
-      wyrAnswer2: 'Circle house',
-      userSelectionMessage: ''
+      //make a list of questions in an array
+      questions : [
+            { 
+              id : 0,
+              question: 'live in a house shaped like a triangle or a house shaped like a circle?',
+              answer1: 'Live in a triangle house',
+              answer2: 'Live in a circle house',
+            
+            },
 
-    }
+            { 
+              id : 1,
+              question: 'be a wizard or a superhero?',
+              answer1: 'Be a wizard',
+              answer2: 'Be a superhero',
+          
+            },
+
+            { 
+              id : 2,
+              question: 'have an elephant-sized cat or a cat-sized elephant?',
+              answer1: 'Have an elephant-sized cat',
+              answer2: 'Have a cat-sized elephant',
+              //userSelectionMessage= ''
+            }
+        ]
+      }
     },
     methods:{
-      answerChanged(choice){
+      answerChanged(choice, id){
         this.userSelectionMessage = `Thanks! you chose ${choice}`
 
       }
@@ -42,7 +62,7 @@ export default {
 <style>
 
 body{
-  background: violet;
+  background: radial-gradient(rgb(97, 97, 203), rgb(115, 198, 115),yellow);
 }
 
 #app {
@@ -50,14 +70,15 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #502c43;
   margin-top: 60px;
   padding: 10px;
-  margin-top: 60px;
+  margin-top: 70px;
   background: bluebiolet;
 }
 
 p{
   font-style: italic;
+  font-size: 30px;
 }
 </style>

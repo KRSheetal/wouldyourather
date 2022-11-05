@@ -1,15 +1,15 @@
 <template>
   <div class="wyr">
-    
-    <h2>Please make your choice!</h2>
+    <!-- display the questions and options here -->
+    <h2>Would you rather...</h2>
 
-    <h3>{{question}}</h3>
+    <h3>...{{question.question}}</h3>
     
-    <input type="radio" v-model="choice" v-bind:value="answer1" v-on:change="choiceMade">
-    <label>{{answer1}}</label>
+    <input type="radio" v-model="choice" v-bind:value="question.answer1" v-on:change="choiceMade">
+    <label>{{question.answer1}}</label>
 
-    <input type="radio" v-model="choice" v-bind:value="answer2" v-on:change="choiceMade">
-    <label>{{answer2}}</label>
+    <input type="radio" v-model="choice" v-bind:value="question.answer2" v-on:change="choiceMade">
+    <label>{{question.answer2}}</label>
 
   </div>
 </template>
@@ -18,9 +18,8 @@
 export default {
   name: 'WouldYouRather',
   props: {
-    question: String,
-    answer1: String,
-    answer2: String
+    question: Object //this will be an object
+    
   },
   data(){
     return{
@@ -30,7 +29,7 @@ export default {
   methods:{
     choiceMade() {
       //emit an event 'answer-changed' and include the value of the data choice
-      this.$emit('answer-changed', this.choice)
+      this.$emit('answer-changed',this.question.id, this.choice)
     }
   }
 }
@@ -39,12 +38,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+  margin: 15px 0 0;
 }
 
 .wyr{
   border: 2px black solid;
-  background: lightseagreen
+  background: linear-gradient(rgb(224, 172, 181), rgb(212, 127, 212))
 }
 
 </style>
